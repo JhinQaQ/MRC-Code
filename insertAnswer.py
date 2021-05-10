@@ -5,13 +5,6 @@
 # @Site    : 
 # @File    : insertAnswer.py
 # @Software: PyCharm
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# @Time    : 2021/4/29 17:38
-# @Author  : Yang Jin
-# @Site    :
-# @File    : insertAnswer.py
-# @Software: PyCharm
 
 import json
 import re
@@ -44,10 +37,6 @@ def index_sentence(se):
     index = re.finditer(r'[。！!?？]', se)
     # temp_index = 0
     for k in index:
-        # print('why')
-        # sentence = se[temp_index:k.span()[1]]
-        # print(sentence)
-        # temp_index = k.span()[1]
         sentence_lst.append(k.span()[1])
     return index
 
