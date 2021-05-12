@@ -22,6 +22,8 @@ load_lst_2 = json.load(f_3)
 temp = []
 append_list = []
 jsn = load_lst_1['data'][0]['paragraphs']
+
+
 # jsn_2 = load_lst_2['data'][0]['paragraphs']
 
 
@@ -109,7 +111,7 @@ for i in jsn:
         #     count = count + 1
         #     if len(text['context']) < 300:
         #         f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
-    # else:
+        # else:
         text['cls'] = 1
         if len(cut_sentence(context)) < 3:
             temp_3 = append_list[count]
@@ -126,41 +128,40 @@ for i in jsn:
                 text['cls'] = 0
                 text['title'] = title
                 f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
-                # print(text)
-                # print('_______________random__________________________')
-                # 随机插入
-                flag = False
-                an_set = set()
 
-                se_lst = insert(context, temp_3)
-                se3_lst = cut_3_sentences(se_lst)
-                for se in se3_lst:
-                    for an in cut_sentence(answer):
-                        if an in se:
-                            an_set.add(se)
-                if len(an_set) != 0:
-                    text['context'] = choice(list(an_set))
-                    text['cls'] = 1
-                    text['title'] = title
-                    # f_4.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
-                    # 负例
-                    for an in cut_sentence(text['context']):
-                        if an in se_lst:
-                            se_lst.remove(an)
-                    se3_lst = cut_3_sentences(se_lst)
-                    if len(se3_lst) != 0:
-                        f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
-                        # print(text)
-                        text['context'] = choice(se3_lst)
-                        text['cls'] = 0
-                        f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
-                        # print(text)
-                        # print('context小于3')
+                # # 随机插入
+                # flag = False
+                # an_set = set()
+                #
+                # se_lst = insert(context, temp_3)
+                # se3_lst = cut_3_sentences(se_lst)
+                # for se in se3_lst:
+                #     for an in cut_sentence(answer):
+                #         if an in se:
+                #             an_set.add(se)
+                # if len(an_set) != 0:
+                #     text['context'] = choice(list(an_set))
+                #     text['cls'] = 1
+                #     text['title'] = title
+                #     # f_4.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
+                #     # 负例
+                #     for an in cut_sentence(text['context']):
+                #         if an in se_lst:
+                #             se_lst.remove(an)
+                #     se3_lst = cut_3_sentences(se_lst)
+                #     if len(se3_lst) != 0:
+                #         f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
+                #         # print(text)
+                #         text['context'] = choice(se3_lst)
+                #         text['cls'] = 0
+                #         f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
+
+
         else:
             l = list(answer_lst(cut_3_sentences(cut_sentence(context)), answer))
             if len(l) != 0:
                 temp_1 = choice(l)
-                if len(cut_sentence(context))-len(cut_sentence(answer)) >= 3:
+                if len(cut_sentence(context)) - len(cut_sentence(answer)) >= 3:
                     temp = no_answer(cut_sentence(context), answer)
                     if len(cut_3_sentences(temp)) >= 1:
                         temp_2 = choice(cut_3_sentences(temp))
@@ -187,39 +188,36 @@ for i in jsn:
                     text['title'] = title
                     # if len(text['context']) < 300 and flag:
                     f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
-                    # print(text)
-                    # print('____________________random____________________')
-                    # 随机插入
-                    flag = False
-                    an_set = set()
 
-                    se_lst = insert(positive, negative)
-                    se3_lst = cut_3_sentences(se_lst)
-                    for se in se3_lst:
-                        for an in cut_sentence(positive):
-                            if an in se:
-                                an_set.add(se)
-                    T_1 = choice(list(an_set))
-                    text['context'] = T_1
-                    text['cls'] = 1
-                    text['title'] = title
-                    # f_4.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
-                    # 负例
-                    for an in cut_sentence(text['context']):
-                        if an in se_lst:
-                            se_lst.remove(an)
-                    se3_lst = cut_3_sentences(se_lst)
-                    if len(se3_lst) != 0:
-                        T_2 = choice(se3_lst)
-                        if len(T_1) != 0 and len(T_2) != 0:
-                            f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
-                            # print(text)
-                            text['context'] = T_2
-                            text['cls'] = 0
-                            f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
-                            # print(text)
-                            # print('context大于3')
-                            # print('-----------------------------------------')
+                    # # 随机插入
+                    # flag = False
+                    # an_set = set()
+                    #
+                    # se_lst = insert(positive, negative)
+                    # se3_lst = cut_3_sentences(se_lst)
+                    # for se in se3_lst:
+                    #     for an in cut_sentence(positive):
+                    #         if an in se:
+                    #             an_set.add(se)
+                    # T_1 = choice(list(an_set))
+                    # text['context'] = T_1
+                    # text['cls'] = 1
+                    # text['title'] = title
+                    # # f_4.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
+                    # # 负例
+                    # for an in cut_sentence(text['context']):
+                    #     if an in se_lst:
+                    #         se_lst.remove(an)
+                    # se3_lst = cut_3_sentences(se_lst)
+                    # if len(se3_lst) != 0:
+                    #     T_2 = choice(se3_lst)
+                    #     if len(T_1) != 0 and len(T_2) != 0:
+                    #         f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
+                    #         # print(text)
+                    #         text['context'] = T_2
+                    #         text['cls'] = 0
+                    #         f_2.write('{}\n'.format(json.dumps(text, ensure_ascii=False)))
+
     temp_1 = None
     temp_2 = None
     temp_3 = None
